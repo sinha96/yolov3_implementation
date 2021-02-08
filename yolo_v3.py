@@ -1,14 +1,14 @@
 import struct
 import numpy as np
-import tensorflow as tf
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import Input
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.layers import LeakyReLU
 from tensorflow.keras.layers import ZeroPadding2D
 from tensorflow.keras.layers import UpSampling2D
-from tensorflow.keras.layers.merge import add, concatenate
+from tensorflow.keras.layers import add, concatenate
 from tensorflow.keras.models import Model
+from tensorflow.keras.utils import plot_model
  
 def _conv_block(inp, convs, skip=True):
 	x = inp
@@ -162,3 +162,13 @@ weight_reader = WeightReader('yolov3.weights')
 weight_reader.load_weights(model)
 # save the model to file
 model.save('model.h5')
+
+
+# If you want to plot the model
+plot_model(
+    model,
+    to_file="yolov3.png",
+    show_shapes=True,
+    show_layer_names=True,
+    rankdir="TB",
+)
